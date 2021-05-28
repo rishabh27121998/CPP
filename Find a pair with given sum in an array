@@ -1,0 +1,93 @@
+//PROBLEM
+//Given an unsorted integer array, find a pair with the given sum in it.
+
+//SOLUTION
+//1) USING BRUTE-FORCE 
+
+
+#include<bits/stdc++.h>
+using namespace std;
+void findPair(int arr[],int n,int sum)
+{
+    for(int i=0;i<n-1;i++)
+    {
+        for(int j=i+1;j<n;j++)
+        {
+            if(arr[i]+arr[j]==sum)
+            {
+                cout<<"Pair found ("<<arr[i]<<","<<arr[j]<<")";
+                return;
+            }
+        }
+    }
+    cout<<"Pair not found";
+}
+int main()
+{
+    int arr[]={8,7,2,5,3,1};
+    int sum=10;
+    int n=sizeof(arr)/sizeof(arr[0]);
+    findPair(arr,n,sum);
+    return 0;
+}
+
+//(2) USING SORTING
+#include<bits/stdc++.h>
+using namespace std;
+void findPair(int arr[],int n,int sum)
+{
+    sort(arr,arr+n);
+    int low=0;
+    int high=n-1;
+    while(low<high)
+    {
+        if(arr[low]+arr[high]==sum)
+        {
+            cout<<"Pair found ("<<arr[low]<<","<<arr[high]<<")"<<endl;
+            return;
+        }
+        (arr[low]+arr[high]<sum)?low++:high--;
+    }
+    cout<<"Pair not found";
+}
+int main()
+{
+    int arr[]={8,7,2,5,3,1};
+    int sum=10;
+    int n=sizeof(arr)/sizeof(arr[0]);
+    findPair(arr,n,sum);
+    return 0;
+}
+
+
+//(3) USING HASHING
+
+#include<bits/stdc++.h>
+using namespace std;
+void findPair(int arr[],int n,int sum)
+{
+    unordered_set<int> s1;
+    
+    for(int i=0;i<n;i++)
+    {
+        auto it=s1.find(sum-arr[i]);
+        if(it!=s1.end())
+        {
+            cout << "Pair found (" << *it << ", " << arr[i] << ")";
+            return;
+        }
+        s1.insert(arr[i]);
+    }
+    cout<<"Pair not found";
+}
+int main()
+{
+    int arr[] = { 8, 7, 2, 5, 3, 1 };
+    int sum = 10;
+ 
+    int n = sizeof(arr)/sizeof(arr[0]);
+ 
+    findPair(arr, n, sum);
+ 
+    return 0;
+}
