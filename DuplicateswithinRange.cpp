@@ -28,7 +28,7 @@ bool hasDuplicate(vector<int> &input,int k)
         {
             if(input[i]==input[j])
             {
-                if(i-j<=k)
+                if(j-i<=k)
                 {
                     return true;
                 }
